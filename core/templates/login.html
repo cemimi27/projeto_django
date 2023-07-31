@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Projeto | Login{% endblock %}
+
+{% block cad_log_link %}../cadastro{% endblock %}
+
+{% block cad_log_title %}Cadastro{% endblock %}
+
+{% block content %}
+
+<div class="main-login">
+    <div class="div-logo">
+        <img src="{% static 'core/img/roupa.jpg' %}" style="width: 100%; height: 100%;" alt="">
+    </div>
+    <div class="div-login">
+        <h1>Login</h1>
+        <form class="form-login" action="{% url 'core:login' %}" method="post" id="login">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Usuário </label>
+                <input class="" type="text" name="username" id="username">
+
+                {% if error_username %}
+                    <p class="msg-error">{{ error_username }}</p>
+                    <script>validarEmail();</script>
+                {% endif%}
+
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha </label>
+                <input type="password" name="senha" id="senha">
+
+                {% if error_senha %}
+                    <p class="msg-error">{{ error_senha }}</p>
+                    <script>validarSenha()</script>
+                {% endif%}
+
+                {% if error_banco %}
+                    <p class="msg-error">{{ error_banco }}</p>
+                {% endif%}
+
+            </div>
+            <button>Login</button>
+            <a href="http://"><p>Esqueci minha senha</p></a>
+        </form>
+    </div>
+</div>
+
+{% if dados %}
+    <p>{{ dados.id }}</p>
+{% endif %}
+
+{% include 'partials/footer.html' %}
+
+{% endblock %}
+
+    

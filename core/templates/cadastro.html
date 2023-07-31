@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Projeto | Cadastro{% endblock %}
+
+{% block cad_log_link %}../login{% endblock %}
+
+{% block cad_log_title %}Login{% endblock %}
+
+{% block content %}
+    
+    <div class="">
+            <form class="form-cadastro" action="{% url 'core:cadastro' %}" method="post">
+                {% csrf_token %}
+                <h1>Cadastro</h1>
+                <div class="">
+                    <label for="nome">Nome</label>
+                    <input type="text" name="nome" id="nome">
+                </div>
+                <div class="">
+                    <label for="cpf">CPF</label>
+                    <input type="text" name="cpf" id="cpf">
+                </div>
+                <div class="">
+                    <label for="endereco">Endereço</label>
+                    <input type="text" name="endereco" id="endereco">
+                </div>
+                <div class="">
+                    <label for="telefone">Telefone</label>
+                    <input type="text" name="telefone" id="telefone">
+                </div>
+                <div class="">
+                    <label for="username">Usuário </label>
+                    <input type="text", name="username" id="username" required>
+                </div>
+                <div class="">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" required>
+                </div>
+                <div class="">
+                    <label for="senha">Senha </label>
+                    <input type="password", name="senha" id="senha" required>
+                </div>
+                <button>Cadastrar</button>
+            </form>  
+    </div>
+    {% include 'partials/footer.html' %}
+{% endblock %}
