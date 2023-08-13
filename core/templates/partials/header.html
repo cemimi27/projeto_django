@@ -1,7 +1,8 @@
-{% load static %}
 <header class="main-header">
     <span class="header-content">
-        <img src="{% static 'core/img/hollowknight.jpg'%}" alt="">
-        <a href="">{% block cad_log %}{% endblock %}</a>
+        <a href="" style="position: absolute; left: 0; margin-left: 12px;">Logo</a>
+        <a href="" style="position: absolute; right: 0; margin-right: 12px;">
+            {% if pagina_atual %}{{ pagina_atual }}{% endif %}
+        </a>
     </span>
 </header>

@@ -15,15 +15,12 @@
     <script src="{% static 'core/js/validacoes.js' %}"></script>
 </head>
 <body>
-        <header class="main-header">
-            <span class="header-content">
-                <img src="{% static 'core/img/hollowknight.jpg'%}" alt="">
-                <a href="{% block cad_log_link %}{% endblock %}"><button>{% block cad_log_title %}{% endblock %}</button></a>
-            </span>
-        </header>
+    
+    {% include 'partials/header.html' %}
 
     {% block content %}
     {% endblock %}
-    {% block footer %}
-    {% endblock %}
+
+    {% include 'partials/footer.html' %}
+    
 </html>

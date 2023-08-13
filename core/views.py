@@ -5,23 +5,43 @@ from django.contrib.auth.decorators import login_required
 from core.models import Usuario
 from time import sleep
 
+
 def login(request):
+    pagina_atual = request.get_full_path().split("/")[2]
+    if pagina_atual == "login":
+        link = "Cadastro"
+
     if request.method == 'POST':
         username = request.POST.get('username')
         senha = request.POST.get('senha')
 
         if len(username) == 0:
-            return render(request, 'login.html', {'error_username': 'Campo usuário vazio!'})
-        if len(senha) == 0:
-            return render(request, 'login.html', {'error_senha': 'Campo senha vazio!'})
-        
-        return validarLoginModel(request, username, senha)
-    
+            return render(request, 'login.html', {'error_username': 'Campo usuário obrigatório!', 'pagina_atual': link})
+        elif len(senha) == 0:
+            return render(request, 'login.html', {'error_senha': 'Campo senha obrigatório!',  'pagina_atual': link})
+        else:
+            resultado = validarLoginModel(request, username, senha)
+            if resultado == 'Sucesso':
+                return render(request, 'login.html', {'msg_success': 'Sucesso'})
+            else:
+                return resultado
     else:
-        return render(request, 'login.html')
+        return render(request, 'login.html', {'pagina_atual': link})
+
+def validarLoginModel(request, username, senha):
+    user = authenticate(username=username, password=senha)
+    if user:
+        login_django(request, user)
+        return 'Sucesso'
+    else:
+        return render(request, 'login.html', {'error_banco': 'Usuário ou senha inválidos!'})
 
 
 def cadastro(request):
+    pagina_atual = request.get_full_path().split("/")[2]
+    if pagina_atual == "cadastro":
+        link = "Login"
+
     if request.method == 'POST':
         nome = request.POST.get('nome')
         cpf = request.POST.get('cpf')
@@ -30,33 +50,65 @@ def cadastro(request):
         username = request.POST.get('username')
         email = request.POST.get('email')
         senha = request.POST.get('senha')
-        resultado = validarCadastroModel(request, nome, cpf, endereco, telefone, username, email, senha)
-        if resultado == 'Sucesso':
-            return render(request, 'cadastro.html', {'msg_cadastro': 'Usuário cadastrado com sucesso!'})
-        else:
-            return render(request, 'cadastro.html', {'msg_cadastro': 'Usuário indisponível!'})
-    else:
-        return render(request, 'cadastro.html')
-    
 
-def validarLoginModel(request, username, senha):
-    user =authenticate(username=username, password=senha)
-    if user:
-        login_django(request, user)
-        return HttpResponse('Sucesso')
-    else:
-        return render(request, 'login.html', {'error_banco': 'Usuário ou senha inválidos!'})
+        user = User.objects.create_user(username=username, email=email, password=senha)
+        usuario = Usuario.objects.create(nome=nome, cpf=cpf, endereco=endereco, telefone=telefone, usuario=user)
+        usuario.save()
+        user.save()
+
+        
+        '''dados = {'nome': nome, 'cpf': cpf, 'endereco': endereco, 'telefone': telefone, 'username': 
+        username, 'email': email, 'senha': senha}
+        '''
+
+        '''for d in dados:
+            if len(dados[d]) == 0:
+                if d == 'endereco':
+                    return render(request, 'cadastro.html', {f'error_{d}': f'Campo endereço obrigatório!', 'pagina_atual': link})
+                elif d == 'username':
+                    return render(request, 'cadastro.html', {f'error_{d}': f'Campo usuário obrigatório!', 'pagina_atual': link})
+                else:
+                    return render(request, 'cadastro.html', {f'error_{d}': f'Campo {d} obrigatório!', 'pagina_atual': link})
+        '''
+         
+        '''if len(nome) == 0:
+            return render(request, 'cadastro.html', {'error_nome': 'Campo nome obrigatório!', 'pagina_atual': link})
+        if len(cpf) == 0:
+            return render(request, 'cadastro.html', {'error_cpf': 'Campo CPF obrigatório!', 'pagina_atual': link})
+        if len(endereco) == 0:
+            return render(request, 'cadastro.html', {'error_endereco': 'Campo endereço obrigatório!', 'pagina_atual': link})
+        if len(telefone) == 0:
+            return render(request, 'cadastro.html', {'error_telefone': 'Campo telefone obrigatório!', 'pagina_atual': link})
+        if len(username) == 0:
+            return render(request, 'cadastro.html', {'error_username': 'Campo usuário obrigatório!', 'pagina_atual': link})
+        if len(email) == 0:
+            return render(request, 'cadastro.html', {'error_email': 'Campo email obrigatório!', 'pagina_atual': link})
+        if len(senha) == 0:
+            return render(request, 'cadastro.html', {'error_senha': 'Campo senha obrigatório!', 'pagina_atual': link})'''
+        
+        
+        '''.git/resultado = validarCadastroModel(request, nome, cpf, endereco, telefone, username, email, senha)
+        if resultado == 'Sucesso':
+            return render(request, 'cadastro.html', {'msg_success': 'Usuário cadastrado com sucesso!', 'pagina_atual': link})
+        else:
+            return render(request, 'cadastro.html', {'msg_error': 'Usuário indisponível!', 'pagina_atual': link})
+        '''
+    
+    '''else:'''
+    return render(request, 'cadastro.html', {'pagina_atual': link})
 
 
 def validarCadastroModel(request, nome, cpf, endereco, telefone, username, email, senha):
-    user = User.objects.filter(username=username).first()
-    if user:
+    userq = User.objects.filter(username=username).first()
+    emailq = User.objects.filter(email=email).first
+    if userq or emailq:
         return 'Falha'
-    user = User.objects.create_user(username=username, email=email, password=senha)
-    usuario = Usuario.objects.create(nome=nome, cpf=cpf, endereco=endereco, telefone=telefone, usuario=user)
-    usuario.save()
-    user.save()        
-    return 'Sucesso'
+    else:
+        user = User.objects.create_user(username=username, email=email, password=senha)
+        usuario = Usuario.objects.create(nome=nome, cpf=cpf, endereco=endereco, telefone=telefone, usuario=user)
+        usuario.save()
+        user.save()        
+        return 'Sucesso'
 
 
 @login_required(login_url='/')

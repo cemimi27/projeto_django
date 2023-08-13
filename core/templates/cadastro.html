@@ -2,46 +2,83 @@
 
 {% block title %}Projeto | Cadastro{% endblock %}
 
-{% block cad_log_link %}../login{% endblock %}
-
-{% block cad_log_title %}Login{% endblock %}
-
 {% block content %}
     
-    <div class="">
+    <div class="main-cadastro">
+        <div class="div-cadastro">
+            <h1>Cadastro</h1>
             <form class="form-cadastro" action="{% url 'core:cadastro' %}" method="post">
                 {% csrf_token %}
-                <h1>Cadastro</h1>
-                <div class="">
+                <div class="form-group">
                     <label for="nome">Nome</label>
                     <input type="text" name="nome" id="nome">
+                    {% if error_nome %}
+                        <p class="msg-error">{{ error_nome }}</p>
+                        <script>validarNome()</script>
+                    {% endif %}
                 </div>
-                <div class="">
+                <div class="form-group">
                     <label for="cpf">CPF</label>
                     <input type="text" name="cpf" id="cpf">
+                    {% if error_cpf %}
+                        <p class="msg-error">{{ error_cpf }}</p>
+                        <script>validarCpf()</script>
+                    {% endif %}
                 </div>
-                <div class="">
+                <div class="form-group">
                     <label for="endereco">Endereço</label>
                     <input type="text" name="endereco" id="endereco">
+                    {% if error_endereco %}
+                        <p class="msg-error">{{ error_endereco }}</p>
+                        <script>validarEndereco()</script>
+                    {% endif %}
                 </div>
-                <div class="">
+                <div class="form-group">
                     <label for="telefone">Telefone</label>
                     <input type="text" name="telefone" id="telefone">
+                    {% if error_telefone %}
+                        <p class="msg-error">{{ error_telefone }}</p>
+                        <script>validarTelefone()</script>
+                    {% endif %}
                 </div>
-                <div class="">
+                <div class="form-group">
                     <label for="username">Usuário </label>
-                    <input type="text", name="username" id="username" required>
+                    <input type="text", name="username" id="username">
+                    {% if error_username %}
+                        <p class="msg-error">{{ error_username }}</p>
+                        <script>validarUsuario();</script>
+                    {% endif %}
                 </div>
-                <div class="">
+                <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="text" name="email" id="email" required>
+                    <input type="text" name="email" id="email">
+                    {% if error_email %}
+                        <p class="msg-error">{{ error_email }}</p>
+                        <script>validarEmailC();</script>
+                    {% endif %}
                 </div>
-                <div class="">
+                <div class="form-group">
                     <label for="senha">Senha </label>
-                    <input type="password", name="senha" id="senha" required>
+                    <input type="password", name="senha" id="senha">
+                    {% if error_senha %}
+                        <p class="msg-error">{{ error_senha }}</p>
+                        <script>validarSenha()</script>
+                    {% endif %}
+
+                    {% if msg_error %}
+                        <p class="msg-error">{{ msg_error }}</p>
+                    {% endif %}
+
+                    {% if msg_success %}
+                        <p class="msg-success">{{ msg_success }}</p>
+                    {% endif %}
+
                 </div>
-                <button>Cadastrar</button>
-            </form>  
+                <div>
+                    <button>Cadastrar</button>
+                </div>
+            </form>
+        </div>
     </div>
-    {% include 'partials/footer.html' %}
+
 {% endblock %}
