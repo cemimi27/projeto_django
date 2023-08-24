@@ -1,16 +1,44 @@
+{% extends 'base.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    {% if status == 'False' %}
-        redirect url 'core:login'
-    {% endif %}
-    <p>{{ dados.usuario }}</p>
-</body>
-</html>
+{% load static %}
+
+{% block content %}
+
+<div class="main-home">
+  <div class="hidden-menu">
+    <div class="hidden-menu-content">
+    <a href="#">Conteúdo</a>
+    <a href="#">Conteúdo</a>
+    <a href="#">Conteúdo</a>
+    <a href="#">Conteúdo</a>
+    <a href="#">Conteúdo</a>
+    <a href="#">Conteúdo</a>
+    </div>
+    <div class="hidden-menu-icons">
+    <a href="#"><img src ="#" width="24" heigth=24></a>
+    <a href="#"><img src ="#" width="24" heigth=24></a>
+    <a href="#"><img src ="#" width="24" heigth=24></a>
+    <a href="{% url 'core:logout' %}"><img src ="{% static 'core/img/icons8-sair-24.png' %}" width="24" heigth=24 title="Fazer logout"></a>
+    </div>
+</div>
+<div class="main-dashboard">
+    <div class="top-dashboard">
+      <div class="dashboard-data">
+        <span style="font-size: 54px;">20:00</span>
+        <span style="font-size: 24px;">17/08/2023</span>
+        <span style="font-size: 32px;">Quinta-Feira</span>
+      </div>
+      <div class="dashboard-dados">
+        <span style="font-size: 64px;">Mr. Batata</span>
+        <span style="font-size: 48px;">Administrador</span>
+      </div>
+    </div>
+    <div class="bottom-dashboard">
+      <a href=""><div class="bt-dash-content">Conteúdo</div></a>
+      <a href=""><div class="bt-dash-content">Conteúdo</div></a>
+      <a href=""><div class="bt-dash-content">Conteúdo</div></a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

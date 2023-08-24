@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login as login_django
+from django.contrib.auth import authenticate, login as login_django, logout as logout_django
 from django.contrib.auth.decorators import login_required
 from core.models import Usuario
 from time import sleep
@@ -32,7 +32,7 @@ def validarLoginModel(request, username, senha):
     user = authenticate(username=username, password=senha)
     if user:
         login_django(request, user)
-        return 'Sucesso'
+        return redirect('../home')
     else:
         return render(request, 'login.html', {'error_banco': 'Usuário ou senha inválidos!'})
 
@@ -51,17 +51,12 @@ def cadastro(request):
         email = request.POST.get('email')
         senha = request.POST.get('senha')
 
-        user = User.objects.create_user(username=username, email=email, password=senha)
-        usuario = Usuario.objects.create(nome=nome, cpf=cpf, endereco=endereco, telefone=telefone, usuario=user)
-        usuario.save()
-        user.save()
-
         
-        '''dados = {'nome': nome, 'cpf': cpf, 'endereco': endereco, 'telefone': telefone, 'username': 
+        dados = {'nome': nome, 'cpf': cpf, 'endereco': endereco, 'telefone': telefone, 'username': 
         username, 'email': email, 'senha': senha}
-        '''
+        
 
-        '''for d in dados:
+        for d in dados:
             if len(dados[d]) == 0:
                 if d == 'endereco':
                     return render(request, 'cadastro.html', {f'error_{d}': f'Campo endereço obrigatório!', 'pagina_atual': link})
@@ -69,38 +64,23 @@ def cadastro(request):
                     return render(request, 'cadastro.html', {f'error_{d}': f'Campo usuário obrigatório!', 'pagina_atual': link})
                 else:
                     return render(request, 'cadastro.html', {f'error_{d}': f'Campo {d} obrigatório!', 'pagina_atual': link})
-        '''
-         
-        '''if len(nome) == 0:
-            return render(request, 'cadastro.html', {'error_nome': 'Campo nome obrigatório!', 'pagina_atual': link})
-        if len(cpf) == 0:
-            return render(request, 'cadastro.html', {'error_cpf': 'Campo CPF obrigatório!', 'pagina_atual': link})
-        if len(endereco) == 0:
-            return render(request, 'cadastro.html', {'error_endereco': 'Campo endereço obrigatório!', 'pagina_atual': link})
-        if len(telefone) == 0:
-            return render(request, 'cadastro.html', {'error_telefone': 'Campo telefone obrigatório!', 'pagina_atual': link})
-        if len(username) == 0:
-            return render(request, 'cadastro.html', {'error_username': 'Campo usuário obrigatório!', 'pagina_atual': link})
-        if len(email) == 0:
-            return render(request, 'cadastro.html', {'error_email': 'Campo email obrigatório!', 'pagina_atual': link})
-        if len(senha) == 0:
-            return render(request, 'cadastro.html', {'error_senha': 'Campo senha obrigatório!', 'pagina_atual': link})'''
         
         
-        '''.git/resultado = validarCadastroModel(request, nome, cpf, endereco, telefone, username, email, senha)
+        resultado = validarCadastroModel(request, nome, cpf, endereco, telefone, username, email, senha)
+
         if resultado == 'Sucesso':
             return render(request, 'cadastro.html', {'msg_success': 'Usuário cadastrado com sucesso!', 'pagina_atual': link})
         else:
-            return render(request, 'cadastro.html', {'msg_error': 'Usuário indisponível!', 'pagina_atual': link})
-        '''
+            return render(request, 'cadastro.html', {'msg_error': 'Usuário indisponível', 'pagina_atual': link})
+
     
-    '''else:'''
-    return render(request, 'cadastro.html', {'pagina_atual': link})
+    else:
+        return render(request, 'cadastro.html', {'pagina_atual': link})
 
 
 def validarCadastroModel(request, nome, cpf, endereco, telefone, username, email, senha):
     userq = User.objects.filter(username=username).first()
-    emailq = User.objects.filter(email=email).first
+    emailq = User.objects.filter(email=email).first()
     if userq or emailq:
         return 'Falha'
     else:
@@ -111,8 +91,13 @@ def validarCadastroModel(request, nome, cpf, endereco, telefone, username, email
         return 'Sucesso'
 
 
-@login_required(login_url='/')
+@login_required(login_url='/core/login')
 def home(request):
     return render(request, 'home.html')
+
+@login_required(login_url='/core/login')
+def logout(request):
+    logout_django(request)
+    return redirect('../core/login')
     
     
