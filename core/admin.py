@@ -1,10 +1,9 @@
 from django.contrib import admin
-from core.models import Usuario, Teste
+from core.models import Usuario
 
 # Register your models here.
 class UsuarioAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(Usuario)
-admin.site.register(Teste)
 

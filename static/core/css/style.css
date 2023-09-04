@@ -270,6 +270,20 @@ a:hover{
     justify-content: flex-start;
     transition: all 1s ease-in-out;
   }
+
+  .hidden-menu-content a{
+    width: 80%;
+    padding: 10px;
+    transition: all 500ms ease-in-out;
+  }
+
+  .hidden-menu-content a:hover{
+    transition: all 300ms ease-in-out;
+    background-color: blue;
+    color: white;
+    border: solid blue 2px;
+    border-radius: 5px;
+  }
   
   .hidden-menu-icons{
     width: 100%;

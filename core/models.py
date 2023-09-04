@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from .validator import validar_campo_vazio, validate_even, validar_usuario
 
 
 # Create your models here.
@@ -13,9 +12,3 @@ class Usuario(models.Model):
 
     def __str__(self):
         return str(self.nome)
-
-class Teste(models.Model):
-    campo1 = models.IntegerField(validators=[validate_even])
-
-    def __str__(self):
-        return str(self.campo1)

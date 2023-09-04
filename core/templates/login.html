@@ -22,8 +22,8 @@
                 <label for="username">Usuário</label>
                 <input class="" type="text" name="username" id="username">
 
-                {% if error_username %}
-                    <p class="msg-error">{{ error_username }}</p>
+                {% if erro_username %}
+                    <p class="msg-error">{{ erro_username }}</p>
                     <script>validarUsuario();</script>
                 {% endif%}
 
@@ -32,8 +32,8 @@
                 <label for="senha">Senha</label>
                 <input type="password" name="senha" id="senha">
 
-                {% if error_senha %}
-                    <p class="msg-error">{{ error_senha }}</p>
+                {% if erro_senha %}
+                    <p class="msg-error">{{ erro_senha }}</p>
                     <script>validarSenha()</script>
                 {% endif%}
 
@@ -41,8 +41,8 @@
                     <p class="msg-success">{{ msg_success }}</p>
                 {% endif %}
 
-                {% if error_banco %}
-                    <p class="msg-error">{{ error_banco }}</p>
+                {% if erro_banco %}
+                    <p class="msg-error">{{ erro_banco }}</p>
                 {% endif%}
 
             </div>
