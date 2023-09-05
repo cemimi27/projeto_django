@@ -24,12 +24,11 @@
 <div class="main-dashboard">
     <div class="top-dashboard">
       <div class="dashboard-data">
-        <span style="font-size: 54px;">20:00</span>
-        <span style="font-size: 24px;">17/08/2023</span>
-        <span style="font-size: 32px;">Quinta-Feira</span>
+        <span style="font-size: 54px;"><p id="time"></p></span>
+        <span style="font-size: 24px;">{{ data_atual  }}</span>
       </div>
       <div class="dashboard-dados">
-        <span style="font-size: 64px;">{{ request.user.usuario.nome }}</span>
+        <span style="font-size: 64px;">{{ request.user.usuario.endereco }}</span>
         <span style="font-size: 48px;">Administrador</span>
       </div>
     </div>
@@ -40,5 +39,8 @@
     </div>
   </div>
 </div>
+
+<script src="{% static 'core/js/validacoes.js' %}"></script>
+<script>horaAtual()</script>
 
 {% endblock %}

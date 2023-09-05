@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as login_django, logout as logout_django
 from django.contrib.auth.decorators import login_required
 from core.models import Usuario
-from time import sleep
 from core import validator
 
 
@@ -71,8 +70,8 @@ def validarCadastroModel(request, nome, cpf, endereco, telefone, username, email
 
 @login_required(login_url='/core/login')
 def home(request):
-
-    return render(request, 'home.html')
+    context = validator.dataAtual()
+    return render(request, 'home.html', context=context)
 
 @login_required(login_url='/core/login')
 def logout(request):

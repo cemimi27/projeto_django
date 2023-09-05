@@ -50,3 +50,15 @@ function validarEmail(){
     email.style.backgroundColor = 'white';
     email.focus();
 }
+
+var displayHora = document.getElementById('time');
+
+function horaAtual() {
+  var hora = new Date();
+  var h = hora.getHours(); 
+  var m = hora.getMinutes();
+  var horaFormatada = (h + ":" + m);
+  displayHora.innerHTML = horaFormatada;
+}
+
+setInterval(horaAtual, 1000);
