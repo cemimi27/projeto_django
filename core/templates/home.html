@@ -25,15 +25,15 @@
     <div class="top-dashboard">
       <div class="dashboard-data">
         <span style="font-size: 54px;"><p id="time"></p></span>
-        <span style="font-size: 24px;">{{ data_atual  }}</span>
+        <span style="font-size: 24px;">{{ data_atual }}</span>
       </div>
       <div class="dashboard-dados">
-        <span style="font-size: 64px;">{{ request.user.usuario.endereco }}</span>
-        <span style="font-size: 48px;">Administrador</span>
+        <span style="font-size: 64px;">{{ request.user.username  }}</span>
+        <span style="font-size: 48px;">{{ request.user.usuario.tipo }}</span>
       </div>
     </div>
     <div class="bottom-dashboard">
-      <a href=""><div class="bt-dash-content">Conteúdo</div></a>
+      <a href="{% url 'produto:cadastro' %}"><div class="bt-dash-content">Produto</div></a>
       <a href=""><div class="bt-dash-content">Conteúdo</div></a>
       <a href=""><div class="bt-dash-content">Conteúdo</div></a>
     </div>
