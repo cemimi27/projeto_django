@@ -1,9 +1,46 @@
 {% extends 'base.html' %}
 
+{% block title %}Produto | Cadastro{% endblock %}
+
 {% block content %}
-    <form action=".">
-        {% csrf_token %}
-        {{ formulario }}
-        <input type="submit" value="Enviar">
-    </form>
+<div class="container mt-4 mb-4">
+        <div class="row">
+            <h1 class="text-center">Cadastrar Produto</h1>
+            <div class="col"></div>
+            <div class="col-md-5 bg-secondary-subtle rounded-2 px-5">
+                <form action="{% url 'produto:cadastro' %}" method="post">
+                    {% csrf_token %}
+                    <div class="mt-3 mb-3 row">
+                        {{ formulario.nome_produto.label }}
+                        {{ formulario.nome_produto }}
+                    </div>
+                    <div class="mb-3 row">
+                        {{ formulario.descricao.label }}
+                        {{ formulario.descricao }}
+                    </div>
+                    <div class="mb-3 row">
+                        {{ formulario.cod_barras.label }}
+                        {{ formulario.cod_barras }}
+                    </div>
+                    <div class="mb-3 row">
+                        {{ formulario.preco_produto.label }}
+                        {{ formulario.preco_produto }}
+                    </div>
+                    <div class="mb-4 row">
+                        {{ formulario.qtd_produto.label }}
+                        {{ formulario.qtd_produto }}
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col"></div>
+                        <input class="btn btn-outline-primary  col-5" type="submit" value="Enviar">
+                        <div class="col"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
+</div>
+{% if Nome %}
+<p>{{ Nome }}</p>
+{% endif %}
 {% endblock %}
