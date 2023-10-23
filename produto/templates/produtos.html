@@ -1,9 +1,30 @@
-{% extends 'base.html' %}
+{% extends 'baselogin.html' %}
+
+{% load static %}
 
 {% block title %}Produto | Produtos{% endblock %}
 
+{% block hiddenmenu %}
+{% include 'hiddenmenu.html' %}
+{% endblock %}
+
 {% block content %}
-    {% for produto in produtos %}
-        <h1>{{ produto.nome_produto }}</h1>
-    {% endfor %}
+<div class="container">
+    <div class="row justify-content-start ms-5">
+        <div class="row mt-4 align-items-center justify-content-between">
+            <div class="col-10 mx-md-4"><h1>Produtos</h1></div>
+            <div class="col"><a href="{% url 'produto:cadastro' %}"><img src="{% static 'produto/img/mais-white-blue.png' %}" title="Cadastrar novo Produto" alt=""></a></div>
+        </div>
+        {% for produto in produtos %}
+            <div class="card col-md-3 mx-md-4 mt-3">
+                <img src="{% static 'produto/img/produto.jpg' %}" alt="" class="img-fluid rounded">
+                <div class="card-body">
+                    <h5 class="card-title">{{ produto.nome_produto }}</h5>
+                    <p class="card-text">{{ produto.descricao }}</p>
+                    <a href="{% url 'produto:detalhes' produto.cod_barras %}" class="btn btn-outline-danger">Detalhes</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

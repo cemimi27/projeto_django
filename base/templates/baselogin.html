@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'node_modules/bootstrap/dist/css/bootstrap.min.css' %}">
+    <title>{% block title %}
+            {% endblock %}
+    </title>
+    <script src="{% static 'core/js/validacoes.js' %}"></script>
+</head>
+<body class="bg-secondary-subtle">
+    
+    <!--{% include 'partials/header.html' %}-->
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {% block hiddenmenu %}
+                {% endblock %}
+                
+            </div>
+            <div class="col-11">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!--{% include 'partials/footer.html' %}-->
+    
+</html>

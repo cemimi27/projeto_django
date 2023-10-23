@@ -1,21 +1,21 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
+    color: #212529;
 }
 
-a{
-    color: blue;
+a:link{
     text-decoration: none;
     transition: all 300ms ease-in-out;
+    color:  #212529;
 }
 
 a:active{
-    color: black;
+    color:  #212529;
 }
 
 a:hover{
-    color: black;
+    color:  #212529;
 }
 
 .main-login{
@@ -232,12 +232,13 @@ a:hover{
 .hidden-menu{
     width: 15px;
     height: 100%;
-    position: absolute;
+    position: fixed;
+    z-index: 1;
     left: 0;
     display: flex;
     flex-direction: column;
-    background-color: whitesmoke;
-    border-right: 1px solid blue;
+    background-color: #f8f9fa;
+    border-right: 1px solid #f8f9fa;
     transition: all 1s ease-in-out
   }
 
@@ -252,37 +253,28 @@ a:hover{
   .hidden-menu:hover .hidden-menu-icons{
     margin-left: 0px;
   }
-
-  .hidden-menu-content:hover .main-dashboard{
-    flex-grow: 1;
-  }
- 
   
   .hidden-menu-content{
-    width: calc(100% - 20px);
+    width: 100%;
     height: 90%;
     margin-left: -350px;
-    padding: 20px;
-    flex: 1 1 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
     transition: all 1s ease-in-out;
   }
 
   .hidden-menu-content a{
-    width: 80%;
-    padding: 10px;
+    padding: 15px;
+    color: #dc3545;
+    border: solid #f8f9fa 2px;
     transition: all 500ms ease-in-out;
   }
 
   .hidden-menu-content a:hover{
     transition: all 300ms ease-in-out;
-    background-color: blue;
-    color: white;
-    border: solid blue 2px;
-    border-radius: 5px;
+    background-color: #dc3545;
+    color: #f8f9fa;
+    border: solid #dc3545 2px;
   }
   
   .hidden-menu-icons{
@@ -294,61 +286,29 @@ a:hover{
     align-items: center;
     justify-content: space-around;
     transition: all 1s ease-in-out;
-    background-color: blue;
+    background-color: #dc3545;
   }
 
 /*DASHBOARD*/
 .main-dashboard{
-    height: 90%;
+    height: 95%;
     width: 90%;
-    padding: 10px;
-    border-radius: 15px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    background-color:  #e6ffe6;
     transition: all 1s ease-in-out;
-  }
-
-  .top-dashboard{
-    width: 100%;
-    height: 50%;
-  }
-  
-  .dashboard-data{
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    justify-content: space-between;
-  }
-  
-  .dashboard-dados{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-  
-  .bottom-dashboard{
-    width: 100%;
-    height: 50%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
   }
   
   .bt-dash-content{
     width: 270px;
     height: 160px;
     margin-top: 10px;
-    border: solid whitesmoke 5px;
+    border: solid #f8f9fa 5px;
     border-radius: 15px;
     box-shadow: 5px 3px 18px 0px rgba(0, 0, 0, 1); 
-    background-color: whitesmoke;
+    background-color: #f8f9fa;
     transition: all 0.5s ease-in-out;
   }
   

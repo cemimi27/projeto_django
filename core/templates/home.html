@@ -1,41 +1,30 @@
-{% extends 'base.html' %}
+{% extends 'baselogin.html' %}
 
 {% load static %}
 
 {% block content %}
 
+{% block hiddenmenu %}
+{% include 'hiddenmenu.html' %}
+{% endblock %}
+
 <div class="main-home">
-  <div class="hidden-menu">
-    <div class="hidden-menu-content">
-    <a href="#">Conteúdo</a>
-    <a href="#">Conteúdo</a>
-    <a href="#">Conteúdo</a>
-    <a href="#">Conteúdo</a>
-    <a href="#">Conteúdo</a>
-    <a href="#">Conteúdo</a>
-    </div>
-    <div class="hidden-menu-icons">
-    <a href="#"><img src ="#" width="24" heigth=24></a>
-    <a href="#"><img src ="#" width="24" heigth=24></a>
-    <a href="#"><img src ="#" width="24" heigth=24></a>
-    <a href="{% url 'core:logout' %}"><img src ="{% static 'core/img/icons8-sair-24.png' %}" width="24" heigth=24 title="Fazer logout"></a>
-    </div>
-</div>
-<div class="main-dashboard">
-    <div class="top-dashboard">
-      <div class="dashboard-data">
-        <span style="font-size: 54px;"><p id="time"></p></span>
-        <span style="font-size: 24px;">{{ data_atual }}</span>
+  
+<div class="main-dashboard p-2 p-md-4 bg-light ms-md-5">
+    <div class="row">
+      <div class="row">
+        <h1 class="h1 col-md-12"><p id="time"></p></h1>
+        <h1 class="h1 col-md-12">{{ data_atual }}</h1>
       </div>
-      <div class="dashboard-dados">
-        <span style="font-size: 64px;">{{ request.user.username  }}</span>
-        <span style="font-size: 48px;">{{ request.user.usuario.tipo }}</span>
+      <div class="row align-items-baseline my-md-5">
+        <h1 class="h1 col-6 text-start">{{ request.user.usuario.nome  }}</h1>
+        <h1 class="h1 col-6 text-end">{{ request.user.usuario.tipo }}</h1>
       </div>
     </div>
-    <div class="bottom-dashboard">
-      <a href="{% url 'produto:produtos' %}"><div class="bt-dash-content">Produto</div></a>
-      <a href=""><div class="bt-dash-content">Conteúdo</div></a>
-      <a href=""><div class="bt-dash-content">Conteúdo</div></a>
+    <div class="container row text-center">
+      <a class="col col-md-4" href="{% url 'produto:produtos' %}"><div class="bt-dash-content text-danger">Produtos</div></a>
+      <a class="col col-md-4" href=""><div class="bt-dash-content">Conteúdo</div></a>
+      <a class="col col-md-4" href=""><div class="bt-dash-content">Conteúdo</div></a>
     </div>
   </div>
 </div>
